@@ -1,0 +1,31 @@
+BINARY:
+cmp R3, R2
+ja FINISH
+mov R2, R7
+mov R3, R8
+add R7, R8
+shr 1, R8
+cmpv [R8], R4
+jz SUCCESS
+jae HIGH
+subi 1, R8
+mov R8, R3
+jmp BINARY
+HIGH:
+addi 1, R8
+mov R8, R2
+jmp BINARY
+FINISH:
+cmpv [R8], R4
+jz SUCCESS
+jmp FAIL
+SUCCESS:
+mov R8, R0
+addi 1, R0
+push R0
+jmp EXIT
+FAIL:
+muli 0, R0
+push R0
+EXIT:
+pop R0
